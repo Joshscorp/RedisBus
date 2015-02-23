@@ -41,6 +41,8 @@ using (var broker = new RedisBroker(new RedisConnection("localhost"), "specialch
 ```
 
 ## Request / Response
+We have **RedisSubscriber** and **RedisPublisher** here for Request/Response style messaging.
+
 Any object will do as the payload. request contains id, Message (RedisMessage), ReceiveQueueName
 
 Can also return exception in redismessage, constructor overload, request should contain the "TestMessageToSend" payload
