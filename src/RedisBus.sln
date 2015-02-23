@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisBus", "RedisBus\RedisBus.csproj", "{A75B1564-0676-4326-A02E-0A7C84FBC5AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisBus.IntegrationTest", "RedisBus.IntegrationTest\RedisBus.IntegrationTest.csproj", "{ADA40E33-113C-45D2-9DAA-6BC8F0CABEFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{607310AD-55BC-4279-8DAD-C138E33C7ACB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
+		RedisBus\RedisBus.nuspec = RedisBus\RedisBus.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A75B1564-0676-4326-A02E-0A7C84FBC5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A75B1564-0676-4326-A02E-0A7C84FBC5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A75B1564-0676-4326-A02E-0A7C84FBC5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A75B1564-0676-4326-A02E-0A7C84FBC5AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA40E33-113C-45D2-9DAA-6BC8F0CABEFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA40E33-113C-45D2-9DAA-6BC8F0CABEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA40E33-113C-45D2-9DAA-6BC8F0CABEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA40E33-113C-45D2-9DAA-6BC8F0CABEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

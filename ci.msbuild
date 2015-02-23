@@ -1,0 +1,77 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         DefaultTargets="Test">
+  <PropertyGroup>
+    <Configuration>Debug</Configuration>
+    <Platform>AnyCPU</Platform>
+    <DefineSolutionProperties>false</DefineSolutionProperties>
+
+    <!-- General Paths -->
+    <RootPath>$(MSBuildStartupDirectory)</RootPath>
+    <SrcPath>$(RootPath)\src</SrcPath>
+    <ReportsPath>$(RootPath)\reports</ReportsPath>
+    <Packages>$(SrcPath)\packages</Packages>
+    <PackageDir>$(RootPath)\nugetpackage</PackageDir>
+
+    <!-- XUnit Paths -->
+    <XUnitPath>$(Packages)\xunit.1.9.2\lib\net20</XUnitPath>
+    <XUnitRunner>xunit.runner.msbuild.dll</XUnitRunner>
+    <XUnitConsolePath>$(Packages)\xunit.runners.1.9.2\tools</XUnitConsolePath>
+    <XUnitConsoleRunner>xunit.console.clr4.x86.exe</XUnitConsoleRunner>
+  </PropertyGroup>
+
+  <!-- The Clean Target -->
+  <ItemGroup>
+    <ProjectFiles Include="**\*.csproj" />
+  </ItemGroup>
+  <Target Name="Clean">
+    <Message Importance="high" Text="Cleaning folders"/>
+    <RemoveDir Directories="$(ReportsPath);$(PackageDir)" 
+                Condition="Exists('$(ReportsPath)')" />
+    <MakeDir Directories = "$(ReportsPath);$(ReportsPath)\Coverage;$(PackageDir)" />
+    <!-- Clean the source code projects -->
+    <MSBuild Projects="@(ProjectFiles)"
+             ContinueOnError="false"
+             Targets="Clean"
+             Properties="Configuration=$(Configuration)" />
+  </Target>
+
+  <!-- The LoadNuGetPackages Target -->
+  <ItemGroup>
+    <NuGetPackageConfigs Include="$(MSBuildStartupDirectory)\**\packages.config" />
+  </ItemGroup>
+  <Target Name="LoadNuGetPackages">
+    <Message Importance="high" Text="Retrieving packages for %(NuGetPackageConfigs.Identity)" />
+    <Exec Command="&quot;$(SrcPath)\.nuget\nuget&quot; install &quot;%(NuGetPackageConfigs.Identity)&quot; -o &quot;$(SrcPath)\packages&quot;" />
+  </Target>
+
+  <!-- The Compile Target -->
+  <Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
+    <Message Importance="high" Text="Compiling projects"/>
+    <MSBuild Projects="$(SrcPath)\RedisBus\RedisBus.csproj;$(SrcPath)\RedisBus.IntegrationTest\RedisBus.IntegrationTest.csproj"
+             Properties="Configuration=$(Configuration);Platform=$(Platform);OutDir=$(OutputDirectory)"             
+             BuildInParallel="true" /> 
+  </Target>
+
+  <!-- Test Target -->
+  <UsingTask
+    AssemblyFile="$(XUnitPath)\$(XUnitRunner)"
+    TaskName="Xunit.Runner.MSBuild.xunit" />
+
+  <ItemGroup>
+    <TestAssemblies Include="..\**\bin\*\*.UnitTest.dll"  />
+  </ItemGroup>
+  <Target Name="Test" DependsOnTargets="Clean;LoadNuGetPackages;Compile">
+    <Message Importance="high" Text="Running xUnit Tests..."/>
+    <xunit Assembly="@(TestAssemblies)" xml="$(ReportsPath)\TestResults.xml"/>
+  </Target>
+
+  <!-- Copy the Nupkg file to the packages directory -->
+  <Target Name="Package" DependsOnTargets="Clean;LoadNuGetPackages;Compile">
+     <ItemGroup>
+      <NugetPackages Include="**\Bin\$(Configuration)\RedisBus*.nupkg" />
+    </ItemGroup>
+    <Message Importance="high" Text="Copying nuget packages..."/>
+    <Copy SourceFiles="@(NugetPackages)" DestinationFolder="$(PackageDir)" />
+    <Delete Files="@(NugetPackages)" />
+  </Target>
+</Project>

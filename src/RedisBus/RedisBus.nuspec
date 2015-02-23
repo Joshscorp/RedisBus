@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>RedisBus</id>
+        <version>0.1.0.0</version>
+        <title>RedisBus</title>
+        <authors>Josh Sim</authors>
+        <owners>Josh Sim</owners>
+        <licenseUrl>https://github.com/Joshscorp/RedisBus/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/Joshscorp/RedisBus</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Redis key value store as a simple messaging BUS in .NET, includes Pub/Sub (Broadcast) and Request/Response patterns support. </description>
+        <summary>RedisBus support in .NET</summary>
+        <copyright>Copyright © Joshscorp 2015</copyright>
+    </metadata>
+</package>
