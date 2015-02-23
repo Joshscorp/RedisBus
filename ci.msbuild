@@ -58,7 +58,7 @@
     TaskName="Xunit.Runner.MSBuild.xunit" />
 
   <ItemGroup>
-    <TestAssemblies Include="..\**\bin\*\*.UnitTest.dll"  />
+    <TestAssemblies Include="..\**\bin\*\*.IntegrationTest.dll"  />
   </ItemGroup>
   <Target Name="Test" DependsOnTargets="Clean;LoadNuGetPackages;Compile">
     <Message Importance="high" Text="Running xUnit Tests..."/>
