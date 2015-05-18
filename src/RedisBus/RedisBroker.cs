@@ -47,13 +47,6 @@ namespace RedisBus
             }
         }
 
-        /// <summary>
-        /// Connection might be flaky at times due to bug with StackExchange
-        /// Should the RedisConnectionClosedException be thrown, please try again.
-        /// Might have up to 10 seconds delay between connections.
-        /// </summary>
-        /// <param name="redisEvent"></param>
-        /// <returns></returns>
         public async Task PublishAsync(RedisEvent redisEvent)
         {
             if (redisEvent == null)
