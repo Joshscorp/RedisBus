@@ -25,6 +25,12 @@ namespace RedisBus
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// Connection might be flaky at times due to bug with StackExchange
+        /// Should the RedisConnectionClosedException be thrown, please try again.
+        /// Might have up to 10 seconds delay between connections.
+        /// </summary>
+        /// <param name="redisEvent"></param>
         public void Publish(RedisEvent redisEvent)
         {
             if (redisEvent == null)
